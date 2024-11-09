@@ -21,9 +21,6 @@ public class Heap<T extends Comparable<T>> implements ColaDePrioridad<T> {
                 indiceActual = this.ordenarDeAbajo(indiceActual);
             }
         }
-        else{
-            this.lista.add(e);
-        }
     };
 
     private int ordenarDeAbajo(int i){
