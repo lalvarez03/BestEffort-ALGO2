@@ -7,6 +7,8 @@ public class Traslado {
     int destino;
     int gananciaNeta;
     int timestamp;
+    int indiceGanancia;
+    int indiceAntiguo;
 
     public Traslado(int id, int origen, int destino, int gananciaNeta, int timestamp){
         this.id = id;
