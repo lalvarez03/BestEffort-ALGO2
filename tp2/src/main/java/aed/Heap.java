@@ -14,7 +14,10 @@ public class Heap<T extends Comparable<T>> implements ColaDePrioridad<T> {
     };
 
     public void apilar(T e){
-        int indiceActual = this.lista.size()-1;
+        int indiceActual = 0;
+        if(!lista.isEmpty()){
+            indiceActual = this.lista.size();
+        }
         this.lista.add(e);
         if (!this.vacia()){
             while(indiceActual>0){
@@ -54,4 +57,14 @@ public class Heap<T extends Comparable<T>> implements ColaDePrioridad<T> {
     public T getMax(){
         return null;
     };
+
+    public void  verLista(){
+        String response = "[";
+        for(int i = 0; i<this.lista.size(); i++){
+            response += this.lista.get(i).toString();
+            response += ", ";
+        }
+        response+="]";
+        System.out.println(response);
+    }
 }
