@@ -196,4 +196,25 @@ public class BestEffortTests {
         assertEquals(2, sis.ciudadConMayorSuperavit());
 
     }
+    @Test
+    void apilar(){
+        Heap lista = new Heap();
+        lista.apilar(20);
+        lista.verLista();
+        lista.apilar(100);
+        lista.verLista();
+        lista.apilar(11);
+        lista.verLista();
+        lista.apilar(5);
+        lista.verLista();
+        lista.apilar(6);
+        lista.verLista();
+        lista.apilar(15);
+        lista.verLista();
+        lista.apilar(8);
+        lista.verLista();
+        lista.apilar(15);
+        lista.verLista();
+
+    }
 }
