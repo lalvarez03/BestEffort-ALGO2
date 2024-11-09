@@ -46,12 +46,58 @@ public class Heap<T extends Comparable<T>> implements ColaDePrioridad<T> {
         }
         return indicePadre;
     }
+
     public T desapilarMax(){
-        return null;
+        T raiz = null;
+        T ultimo = null;
+        int indice = 0;
+        if(this.lista.size()==1){
+            raiz = this.lista.get(0);
+            this.lista.remove(0);
+        }
+        else if(this.lista.size()>1){
+            raiz = this.lista.get(0);
+            ultimo = this.lista.get(lista.size()-1);
+            this.lista.set(0, ultimo);
+            this.lista.remove(lista.size()-1);
+            while(true){
+                indice = ordenarDeArriba(indice);
+                if(indice*2+1>=this.lista.size()&&indice*2+2>=this.lista.size()){
+                    break;
+                }
+            }
+        }
+        return raiz;
     };
 
     private int ordenarDeArriba(int i){
-        return 0;
+        int indicePadre = i;
+        T hijoIzq;
+        T hijoDer;
+        T padre = this.lista.get(indicePadre);
+        T hijo=null;
+        int indiceHijoMaximo=this.lista.size();
+        if(this.lista.size()-1<=indicePadre*2+2){
+            hijoDer=this.lista.get(indicePadre*2+2);
+            hijoIzq=this.lista.get(indicePadre*2+1);
+            if(hijoDer.compareTo(hijoIzq)>=0){
+                hijo = this.lista.get(indicePadre*2+2);
+                indiceHijoMaximo = indicePadre*2+2;
+            }
+            else{
+                hijo = this.lista.get(indicePadre*2+1);
+                indiceHijoMaximo = indicePadre*2+1;
+            }
+        }
+        else if (this.lista.size()-1<=indicePadre*2+1) {
+            hijo = this.lista.get(indicePadre*2+1);
+            indiceHijoMaximo = indicePadre*2+1;
+        }
+        if (hijo!=null&&indiceHijoMaximo<this.lista.size()&&padre.compareTo(hijo)<0){
+            this.lista.set(indicePadre, hijo);
+            this.lista.set(indiceHijoMaximo, padre);
+        }
+        return indiceHijoMaximo;
     }
 
     public T getMax(){
