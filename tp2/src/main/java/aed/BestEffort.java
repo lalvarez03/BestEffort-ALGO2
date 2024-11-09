@@ -3,10 +3,22 @@ package aed;
 import java.util.ArrayList;
 
 public class BestEffort {
-    //Completar atributos privados
+    private ArrayList<Integer> mayoresGanancias;
+    private ArrayList<Integer> mayoresPerdidas;
+    private int gananciasTotales;
+    private int cantidadDespachos;
+    private Heap trasladosOrdenadosXGanancias;
+    private Heap trasladosOrdenadosXTimestamp;
+    private Heap ciudades;
 
     public BestEffort(int cantCiudades, Traslado[] traslados){
-        // Implementar
+        for(int i = 0; i < cantCiudades; i++){
+            ciudades.apilar(new Ciudad(i));
+        }
+        for(int i = 0; i < traslados.length; i++){
+            trasladosOrdenadosXGanancias.apilar(traslados[i]);
+            trasladosOrdenadosXTimestamp.apilar(traslados[i]);
+        }
     }
 
     public void registrarTraslados(Traslado[] traslados){
@@ -29,18 +41,15 @@ public class BestEffort {
     }
 
     public ArrayList<Integer> ciudadesConMayorGanancia(){
-        // Implementar
-        return null;
+        return mayoresGanancias;
     }
 
     public ArrayList<Integer> ciudadesConMayorPerdida(){
-        // Implementar
-        return null;
+        return mayoresPerdidas;
     }
 
     public int gananciaPromedioPorTraslado(){
-        // Implementar
-        return 0;
+        return gananciasTotales/cantidadDespachos;
     }
     
 }

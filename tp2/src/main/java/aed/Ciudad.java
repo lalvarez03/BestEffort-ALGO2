@@ -1,6 +1,6 @@
 package aed;
 
-public class Ciudad {
+public class Ciudad implements Comparable<Ciudad> {
     int ciudad;
     int gananciaTotal;
     int perdidaTotal;
@@ -40,5 +40,10 @@ public class Ciudad {
 
     public void agregarPerdida(int perdida){
         this.perdidaTotal += perdida;
+    }
+
+    @Override
+    public int compareTo(Ciudad o) {
+        return 0;
     }
 }
