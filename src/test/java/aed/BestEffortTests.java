@@ -1,12 +1,12 @@
 package aed;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 public class BestEffortTests {
 
@@ -194,27 +194,6 @@ public class BestEffortTests {
 
         sis.despacharMasAntiguos(1);
         assertEquals(2, sis.ciudadConMayorSuperavit());
-
-    }
-    @Test
-    void apilar(){
-        Heap lista = new HeapGanancia();
-        lista.apilar(20);
-        lista.verLista();
-        lista.apilar(100);
-        lista.verLista();
-        lista.apilar(11);
-        lista.verLista();
-        lista.apilar(5);
-        lista.verLista();
-        lista.apilar(6);
-        lista.verLista();
-        lista.apilar(15);
-        lista.verLista();
-        lista.apilar(8);
-        lista.verLista();
-        lista.apilar(15);
-        lista.verLista();
 
     }
 }
