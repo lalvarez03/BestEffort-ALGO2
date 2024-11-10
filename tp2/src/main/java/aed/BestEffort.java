@@ -7,11 +7,16 @@ public class BestEffort {
     private ArrayList<Integer> mayoresPerdidas;
     private int gananciasTotales;
     private int cantidadDespachos;
-    private Heap trasladosOrdenadosXGanancias;
-    private Heap trasladosOrdenadosXTimestamp;
-    private Heap ciudades;
+    private HeapGanancia trasladosOrdenadosXGanancias;
+    private HeapTimestamp trasladosOrdenadosXTimestamp;
+    private HeapCiudadesSuperavit ciudades;
 
     public BestEffort(int cantCiudades, Traslado[] traslados){
+        ciudades = new HeapCiudadesSuperavit();
+        trasladosOrdenadosXGanancias = new HeapGanancia();
+        trasladosOrdenadosXTimestamp = new HeapTimestamp();
+        trasladosOrdenadosXTimestamp.setOtroHeap(trasladosOrdenadosXGanancias);
+        trasladosOrdenadosXGanancias.setOtroHeap(trasladosOrdenadosXTimestamp);
         for(int i = 0; i < cantCiudades; i++){
             ciudades.apilar(new Ciudad(i));
         }
@@ -36,8 +41,7 @@ public class BestEffort {
     }
 
     public int ciudadConMayorSuperavit(){
-        // Implementar
-        return 0;
+        return ciudades.desapilarMax().getSuperavit();
     }
 
     public ArrayList<Integer> ciudadesConMayorGanancia(){
