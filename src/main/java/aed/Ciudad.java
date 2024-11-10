@@ -1,33 +1,66 @@
 package aed;
 
-public class Ciudad {
-    private int idCiudad;
-    private double gananciaTotal;
-    private double perdidatotal;
-    private int idSuperavit;
+public class Ciudad implements Comparable<Ciudad> {
+    private int ciudad;
+    private int gananciaTotal;
+    private int perdidaTotal;
+    private int superavit;
+    private int indiceHeap;
 
-    public Ciudad(int idCiudad) {
-        this.idCiudad = idCiudad;
-        gananciaTotal = 0;
-        perdidatotal = 0;
-        idSuperavit = idCiudad;
+    public Ciudad(int ciudad){
+        this.ciudad = ciudad;
+        this.gananciaTotal = 0;
+        this.perdidaTotal = 0;
+        this.superavit = 0;
     }
-    public int getIdCiudad() {
-        return idCiudad;
+
+    public int getId(){
+        return this.ciudad;
     }
-    public void agregarGanancia(double ganancia){
+
+    public int getSuperavit(){
+        return this.superavit;
+    }
+
+    public int getGanancia(){
+        return this.gananciaTotal;
+    }
+
+    public int getPerdida(){
+        return this.perdidaTotal;
+    }
+
+    public int getIndiceHeap(){
+        return this.indiceHeap;
+    }
+
+    public void setIndiceHeap(int i){
+        this.indiceHeap = i;
+    }
+
+    public void agregarGanancia(int ganancia){
         this.gananciaTotal += ganancia;
+        if(gananciaTotal-perdidaTotal>0){
+            this.superavit = gananciaTotal-perdidaTotal;
+        }
+        else{
+            this.superavit = 0; 
+        }
     }
-    public void agregarPerdidatotal(double perdida){
-        this.perdidatotal += perdida;
+
+    public void agregarPerdida(int perdida){
+        this.perdidaTotal += perdida;
+        if(gananciaTotal-perdidaTotal>0){
+            this.superavit = gananciaTotal-perdidaTotal;
+        }
+        else{
+            this.superavit = 0; 
+        }
+        
     }
-    public double getGananciaTotal() {
-        return gananciaTotal;
-    }
-    public double getPerdidatotal() {
-        return perdidatotal;
-    }
-    public int getidSuperavit() {
-        return idSuperavit;
+
+    @Override
+    public int compareTo(Ciudad o) {
+        return 0;
     }
 }
