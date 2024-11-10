@@ -3,7 +3,7 @@ package aed;
 import java.util.ArrayList;
 
 public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T> {
-    private ArrayList<T> lista; 
+    private ArrayList<T> lista;
 
     public Heap(){
         this.lista = new ArrayList();
@@ -27,7 +27,11 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         }
     };
 
-    private int ordenarDeAbajo(int i){
+    public int getTamañoLista(){
+        return this.lista.size();
+    }
+
+    protected int ordenarDeAbajo(int i){
         int indiceActual = i;
         int indicePadre;
         T actual = this.lista.get(indiceActual);
@@ -73,7 +77,7 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         return raiz;
     };
 
-    private int ordenarDeArriba(int i){
+    protected int ordenarDeArriba(int i){
         int indicePadre = i;
         T hijoIzq;
         T hijoDer;

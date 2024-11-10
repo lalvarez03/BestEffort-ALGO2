@@ -7,7 +7,7 @@ public class HeapCiudadesSuperavit extends Heap<Ciudad>{
         if (a.getSuperavit() != b.getSuperavit()) {
             return a.getSuperavit() > b.getSuperavit();
         }
-        return a.getSuperavit() > b.getSuperavit(); // Desempata usando el ID
+        return a.getId() > b.getId();
     }
     
     @Override
@@ -15,8 +15,24 @@ public class HeapCiudadesSuperavit extends Heap<Ciudad>{
         int indice=0;
         return indice;
     }
-
+    
     @Override
     protected void eliminarN(Ciudad a){
+    }
+
+    public void ordenarGananciaN(int i){
+        int indice = i;
+        while(indice>0){
+            indice = this.ordenarDeAbajo(indice);
+        }
+    }
+    public void ordenarPerdidaN(int i){
+        int indice = i;
+        while(true){
+            indice = ordenarDeArriba(indice);
+            if(indice*2+1>=this.getTamañoLista()&&indice*2+2>=this.getTamañoLista()){
+                break;
+            }
+        }
     }
 }
