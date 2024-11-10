@@ -1,12 +1,12 @@
 package aed;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BestEffortTests {
 
@@ -198,7 +198,7 @@ public class BestEffortTests {
     }
     @Test
     void apilar(){
-        Heap lista = new Heap();
+        Heap lista = new HeapGanancia();
         lista.apilar(20);
         lista.verLista();
         lista.apilar(100);

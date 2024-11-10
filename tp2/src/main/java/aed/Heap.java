@@ -19,6 +19,7 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
             indiceActual = this.lista.size();
         }
         this.lista.add(e);
+        this.guardarIndice(e,indiceActual);
         if (!this.vacia()){
             while(indiceActual>0){
                 indiceActual = this.ordenarDeAbajo(indiceActual);
@@ -40,6 +41,8 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         if (this.esMayor(actual, padre)){
             this.lista.set(indicePadre, actual);
             this.lista.set(indiceActual, padre);
+            this.guardarIndice(actual, indicePadre);
+            this.guardarIndice(padre, indiceActual);
         }
         else{
             indicePadre = -1;
@@ -47,10 +50,10 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         return indicePadre;
     }
 
-    public T desapilarMax(){
+    public T desapilar(int i){
         T raiz = null;
         T ultimo = null;
-        int indice = 0;
+        int indice = i;
         if(this.lista.size()==1){
             raiz = this.lista.get(0);
             this.lista.remove(0);
@@ -96,6 +99,8 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         if (hijo!=null&&indiceHijoMaximo<this.lista.size()&&this.esMayor(hijo, padre)){
             this.lista.set(indicePadre, hijo);
             this.lista.set(indiceHijoMaximo, padre);
+            this.guardarIndice(hijo, indicePadre);
+            this.guardarIndice(padre, indiceHijoMaximo);
         }
         return indiceHijoMaximo;
     }
@@ -111,6 +116,7 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
 
     protected abstract boolean esMayor(T a, T b);
     protected abstract int guardarIndice(T a, int indice); 
+    protected abstract void eliminarN(T a);
 
 
     public void  verLista(){
