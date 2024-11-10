@@ -2,7 +2,7 @@ package aed;
 
 import java.util.ArrayList;
 
-public class Heap<T extends Comparable<T>> implements ColaDePrioridad<T> {
+public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T> {
     private ArrayList<T> lista; 
 
     public Heap(){
@@ -37,7 +37,7 @@ public class Heap<T extends Comparable<T>> implements ColaDePrioridad<T> {
         else{
             indicePadre = (indiceActual-2)/2;
         }
-        if (padre.compareTo(actual)<0){
+        if (this.esMayor(actual, padre)){
             this.lista.set(indicePadre, actual);
             this.lista.set(indiceActual, padre);
         }
@@ -80,7 +80,7 @@ public class Heap<T extends Comparable<T>> implements ColaDePrioridad<T> {
         if(this.lista.size()-1<=indicePadre*2+2){
             hijoDer=this.lista.get(indicePadre*2+2);
             hijoIzq=this.lista.get(indicePadre*2+1);
-            if(hijoDer.compareTo(hijoIzq)>=0){
+            if(this.esMayor(hijoDer, hijoIzq)){
                 hijo = this.lista.get(indicePadre*2+2);
                 indiceHijoMaximo = indicePadre*2+2;
             }
@@ -93,7 +93,7 @@ public class Heap<T extends Comparable<T>> implements ColaDePrioridad<T> {
             hijo = this.lista.get(indicePadre*2+1);
             indiceHijoMaximo = indicePadre*2+1;
         }
-        if (hijo!=null&&indiceHijoMaximo<this.lista.size()&&padre.compareTo(hijo)<0){
+        if (hijo!=null&&indiceHijoMaximo<this.lista.size()&&this.esMayor(hijo, padre)){
             this.lista.set(indicePadre, hijo);
             this.lista.set(indiceHijoMaximo, padre);
         }
@@ -101,8 +101,17 @@ public class Heap<T extends Comparable<T>> implements ColaDePrioridad<T> {
     }
 
     public T getMax(){
-        return null;
+        if(!this.vacia()){
+            return this.lista.get(0);
+        }
+        else{
+            return null;
+        }
     };
+
+    protected abstract boolean esMayor(T a, T b);
+    protected abstract int guardarIndice(T a, int indice); 
+
 
     public void  verLista(){
         String response = "[";
