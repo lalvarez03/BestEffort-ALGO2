@@ -1,11 +1,11 @@
 package aed;
 
 public class Ciudad implements Comparable<Ciudad> {
-    int ciudad;
-    int gananciaTotal;
-    int perdidaTotal;
-    int superavit;
-    int indiceHeap;
+    private int ciudad;
+    private int gananciaTotal;
+    private int perdidaTotal;
+    private int superavit;
+    private int indiceHeap;
 
     public Ciudad(int ciudad){
         this.ciudad = ciudad;
