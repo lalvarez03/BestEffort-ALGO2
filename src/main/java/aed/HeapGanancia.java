@@ -8,15 +8,18 @@ public class HeapGanancia extends Heap<Traslado> {
         return a.gananciaNeta > b.gananciaNeta;
     }
     @Override
-    protected int guardarIndice(Traslado a, int i){
-        int indice=0;
-        return indice;
+    protected void guardarIndice(Traslado a, int i){
+        int indice = i;
+        a.setIndiceGanancia(indice);
     }
 
     @Override
     protected void eliminarN(Traslado a){
-        
-    }
+        if(a.indiceAntiguo!=-1){
+            this.otroHeap.desapilar(a.indiceAntiguo);
+            a.setIndiceAntiguo(-1);
+        }
+    } 
     
     public void setOtroHeap(HeapTimestamp otroHeap) {
         this.otroHeap = otroHeap;

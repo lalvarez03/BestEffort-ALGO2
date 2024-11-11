@@ -11,9 +11,9 @@ public class HeapCiudadesSuperavit extends Heap<Ciudad>{
     }
     
     @Override
-    protected int guardarIndice(Ciudad a, int i){
-        int indice=0;
-        return indice;
+    protected void guardarIndice(Ciudad a, int i){
+        int indice = i;
+        a.setIndiceHeap(indice);
     }
     
     @Override

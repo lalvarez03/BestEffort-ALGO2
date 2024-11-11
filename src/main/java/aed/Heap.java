@@ -63,20 +63,25 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
             this.lista.remove(0);
         }
         else if(this.lista.size()>1){
-            raiz = this.lista.get(0);
+            raiz = this.lista.get(indice);
+            this.guardarIndice(raiz, -1);
             ultimo = this.lista.get(lista.size()-1);
-            this.lista.set(0, ultimo);
+            this.lista.set(indice, ultimo);
+            this.guardarIndice(ultimo, indice);
             this.lista.remove(lista.size()-1);
             while(true){
-                indice = ordenarDeArriba(indice);
+                if(this.lista.size()>indice*2+1){
+                    indice = ordenarDeArriba(indice);
+                }
                 if(indice*2+1>=this.lista.size()&&indice*2+2>=this.lista.size()){
                     break;
                 }
             }
         }
+        this.eliminarN(raiz);
         return raiz;
     };
-
+    
     protected int ordenarDeArriba(int i){
         int indicePadre = i;
         T hijoIzq;
@@ -84,7 +89,7 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         T padre = this.lista.get(indicePadre);
         T hijo=null;
         int indiceHijoMaximo=this.lista.size();
-        if(this.lista.size()-1<=indicePadre*2+2){
+        if(this.lista.size()-1>=indicePadre*2+2){
             hijoDer=this.lista.get(indicePadre*2+2);
             hijoIzq=this.lista.get(indicePadre*2+1);
             if(this.esMayor(hijoDer, hijoIzq)){
@@ -96,7 +101,7 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
                 indiceHijoMaximo = indicePadre*2+1;
             }
         }
-        else if (this.lista.size()-1<=indicePadre*2+1) {
+        else if (this.lista.size()-1==indicePadre*2+1) {
             hijo = this.lista.get(indicePadre*2+1);
             indiceHijoMaximo = indicePadre*2+1;
         }
@@ -119,7 +124,7 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
     };
 
     protected abstract boolean esMayor(T a, T b);
-    protected abstract int guardarIndice(T a, int indice); 
+    protected abstract void guardarIndice(T a, int indice); 
     protected abstract void eliminarN(T a);
 
 

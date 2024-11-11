@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: aed.BestEffortTests
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 7, Errors: 2, Skipped: 0, Time elapsed: 0.112 s <<< FAILURE! - in aed.BestEffortTests
-aed.BestEffortTests.agregar_traslados  Time elapsed: 0.05 s  <<< FAILURE!
+Tests run: 9, Failures: 8, Errors: 1, Skipped: 0, Time elapsed: 0.098 s <<< FAILURE! - in aed.BestEffortTests
+aed.BestEffortTests.agregar_traslados  Time elapsed: 0.049 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -11,7 +11,7 @@ org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
 	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:528)
 	at aed.BestEffortTests.assertSetEquals(BestEffortTests.java:34)
-	at aed.BestEffortTests.agregar_traslados(BestEffortTests.java:139)
+	at aed.BestEffortTests.agregar_traslados(BestEffortTests.java:138)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
@@ -82,7 +82,7 @@ org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-aed.BestEffortTests.apilar  Time elapsed: 0.002 s  <<< ERROR!
+aed.BestEffortTests.apilar  Time elapsed: 0.001 s  <<< ERROR!
 java.lang.ClassCastException: class java.lang.Integer cannot be cast to class aed.Traslado (java.lang.Integer is in module java.base of loader 'bootstrap'; aed.Traslado is in unnamed module of loader 'app')
 	at aed.HeapGanancia.guardarIndice(HeapGanancia.java:3)
 	at aed.Heap.apilar(Heap.java:22)
@@ -157,7 +157,7 @@ java.lang.ClassCastException: class java.lang.Integer cannot be cast to class ae
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-aed.BestEffortTests.despachar_mas_viejo_de_a_varios  Time elapsed: 0.002 s  <<< FAILURE!
+aed.BestEffortTests.despachar_mas_viejo_de_a_varios  Time elapsed: 0.001 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <2> but was: <1>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -238,7 +238,7 @@ org.opentest4j.AssertionFailedError: expected: <2> but was: <1>
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
 aed.BestEffortTests.mayor_superavit  Time elapsed: 0.001 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <2> but was: <0>
+org.opentest4j.AssertionFailedError: expected: <2> but was: <1>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
 	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
@@ -317,7 +317,7 @@ org.opentest4j.AssertionFailedError: expected: <2> but was: <0>
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
 aed.BestEffortTests.promedio_por_traslado  Time elapsed: 0.001 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <333> but was: <1133>
+org.opentest4j.AssertionFailedError: expected: <333> but was: <1166>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
 	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
@@ -395,8 +395,8 @@ org.opentest4j.AssertionFailedError: expected: <333> but was: <1133>
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-aed.BestEffortTests.despachar_con_mas_ganancia_de_a_uno  Time elapsed: 0.001 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <2> but was: <1>
+aed.BestEffortTests.despachar_con_mas_ganancia_de_a_uno  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <2> but was: <3>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
 	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
@@ -404,7 +404,7 @@ org.opentest4j.AssertionFailedError: expected: <2> but was: <1>
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
 	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:528)
 	at aed.BestEffortTests.assertSetEquals(BestEffortTests.java:34)
-	at aed.BestEffortTests.despachar_con_mas_ganancia_de_a_uno(BestEffortTests.java:56)
+	at aed.BestEffortTests.despachar_con_mas_ganancia_de_a_uno(BestEffortTests.java:57)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
@@ -475,18 +475,15 @@ org.opentest4j.AssertionFailedError: expected: <2> but was: <1>
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-aed.BestEffortTests.despachar_mixtos  Time elapsed: 0.001 s  <<< ERROR!
-java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 2
-	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:100)
-	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:106)
-	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:302)
-	at java.base/java.util.Objects.checkIndex(Objects.java:365)
-	at java.base/java.util.ArrayList.get(ArrayList.java:428)
-	at aed.Heap.ordenarDeArriba(Heap.java:88)
-	at aed.Heap.desapilar(Heap.java:71)
-	at aed.HeapTimestamp.eliminarN(HeapTimestamp.java:17)
-	at aed.BestEffort.despacharMasAntiguos(BestEffort.java:72)
-	at aed.BestEffortTests.despachar_mixtos(BestEffortTests.java:113)
+aed.BestEffortTests.despachar_mixtos  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: No se encontró el elemento 3 en el arreglo [1] ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:211)
+	at aed.BestEffortTests.assertSetEquals(BestEffortTests.java:40)
+	at aed.BestEffortTests.despachar_mixtos(BestEffortTests.java:115)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
@@ -558,7 +555,7 @@ java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 2
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
 aed.BestEffortTests.despachar_mas_viejo_de_a_uno  Time elapsed: 0.001 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: No se encontró el elemento 0 en el arreglo [6] ==> expected: <true> but was: <false>
+org.opentest4j.AssertionFailedError: No se encontró el elemento 0 en el arreglo [3] ==> expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
 	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
@@ -636,8 +633,8 @@ org.opentest4j.AssertionFailedError: No se encontró el elemento 0 en el arreglo
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-aed.BestEffortTests.despachar_con_mas_ganancia_de_a_varios  Time elapsed: 0.002 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <2> but was: <1>
+aed.BestEffortTests.despachar_con_mas_ganancia_de_a_varios  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <2> but was: <3>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
 	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
@@ -645,7 +642,7 @@ org.opentest4j.AssertionFailedError: expected: <2> but was: <1>
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
 	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:528)
 	at aed.BestEffortTests.assertSetEquals(BestEffortTests.java:34)
-	at aed.BestEffortTests.despachar_con_mas_ganancia_de_a_varios(BestEffortTests.java:66)
+	at aed.BestEffortTests.despachar_con_mas_ganancia_de_a_varios(BestEffortTests.java:67)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)

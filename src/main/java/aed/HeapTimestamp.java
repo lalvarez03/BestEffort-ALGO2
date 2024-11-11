@@ -5,17 +5,22 @@ public class HeapTimestamp extends Heap<Traslado>{
     @Override
     protected boolean esMayor(Traslado a, Traslado b) {
         // Compara por ganancia neta. Si son iguales, compara por ID para garantizar orden único.
-        return a.gananciaNeta > b.gananciaNeta;
+        return a.timestamp > b.timestamp;
     }
     @Override
-    protected int guardarIndice(Traslado a, int i){
-        int indice=0;
-        return indice;
+    protected void guardarIndice(Traslado a, int i){
+        int indice = i;
+        a.setIndiceAntiguo(indice);;
     }
+
     @Override
     protected void eliminarN(Traslado a){
-        this.otroHeap.desapilar(a.indiceGanancia);
+        if(a.indiceGanancia!=-1){
+            this.otroHeap.desapilar(a.indiceGanancia);
+            a.setIndiceGanancia(-1);
+        }
     }    
+
     public void setOtroHeap(HeapGanancia otroHeap) {
         this.otroHeap = otroHeap;
     }
