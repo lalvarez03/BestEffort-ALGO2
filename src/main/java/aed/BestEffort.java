@@ -105,7 +105,7 @@ public class BestEffort {
     }
 
     public int ciudadConMayorSuperavit(){
-        return ciudadesSuperavit.desapilar(0).getSuperavit();
+        return 1;
     }
 
     public ArrayList<Integer> ciudadesConMayorGanancia(){
