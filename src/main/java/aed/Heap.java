@@ -61,6 +61,7 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         if(this.lista.size()==1){
             raiz = this.lista.get(0);
             this.lista.remove(0);
+            this.guardarIndice(raiz, -1);
         }
         else if(this.lista.size()>1){
             raiz = this.lista.get(indice);

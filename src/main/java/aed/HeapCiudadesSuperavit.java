@@ -35,4 +35,9 @@ public class HeapCiudadesSuperavit extends Heap<Ciudad>{
             }
         }
     }
+
+    public int getIdCiudadMayorSuperavit(Ciudad c){
+        int res = c.getId();
+        return res;
+    }
 }
