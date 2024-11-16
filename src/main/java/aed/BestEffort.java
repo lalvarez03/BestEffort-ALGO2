@@ -65,9 +65,9 @@ public class BestEffort {
             int origen = t.origen;
             int destino = t.destino;
             this.ciudades[origen].agregarGanancia(t.gananciaNeta);
-            this.ciudadesSuperavit.ordenarGananciaN(ciudades[destino].getIndiceHeap());
+            this.ciudadesSuperavit.ordenarGananciaN(ciudades[origen].getIndiceHeap());
             this.ciudades[destino].agregarPerdida(t.gananciaNeta);
-            this.ciudadesSuperavit.ordenarPerdidaN(ciudades[origen].getIndiceHeap());
+            this.ciudadesSuperavit.ordenarPerdidaN(ciudades[destino].getIndiceHeap());
             res[i]=t.id;
             this.trasladosOrdenadosXTimestamp.eliminarN(t);
             this.actualizarCiudades(origen, destino, t);

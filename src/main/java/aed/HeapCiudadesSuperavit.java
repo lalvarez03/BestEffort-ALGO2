@@ -7,7 +7,7 @@ public class HeapCiudadesSuperavit extends Heap<Ciudad>{
         if (a.getSuperavit() != b.getSuperavit()) {
             return a.getSuperavit() > b.getSuperavit();
         }
-        return a.getId() > b.getId();
+        return a.getId() < b.getId();
     }
     
     @Override
