@@ -19,7 +19,7 @@ public class PuntoYYcomaTests {
         cantCiudades = 7;
         listaTraslados = new Traslado[] {
             new Traslado(1, 0, 1, 100, 50),
-            new Traslado(2, 0, 1, 200, 30), // Timestamp más antiguo
+            new Traslado(2, 0, 1, 200, 30),
             new Traslado(3, 3, 4, 150, 40),
             new Traslado(4, 4, 3, 180, 20),
             new Traslado(5, 1, 0, 120, 10),
@@ -27,21 +27,19 @@ public class PuntoYYcomaTests {
         };
         bestEffort = new BestEffort(cantCiudades, listaTraslados);
     }
-
     @Test
     void testDespacharMasAntiguos() {
         int[] trasladosAntiguos = bestEffort.despacharMasAntiguos(2);
         // Verificamos que los traslados devueltos sean los de menor timestamp
-        assertEquals(5, trasladosAntiguos[0], "El traslado con el timestamp más antiguo debería ser el 5");
-        assertEquals(4, trasladosAntiguos[1], "El segundo traslado más antiguo debería ser el 4");
+        assertEquals(5, trasladosAntiguos[0]); //i=0 corresponde al traslado
+        assertEquals(4, trasladosAntiguos[1]);
     }
 
     @Test
     void testDespacharMasRedituables() {
         int[] trasladosRedituables = bestEffort.despacharMasRedituables(2);
-        // Comprobamos los traslados con mayores ganancias netas
-        assertEquals(6, trasladosRedituables[0], "El traslado con mayor ganancia debería ser el 6");
-        assertEquals(2, trasladosRedituables[1], "El segundo traslado con mayor ganancia debería ser el 2");
+        assertEquals(6, trasladosRedituables[0]);
+        assertEquals(2, trasladosRedituables[1]);
     }
 
     @Test
@@ -84,4 +82,5 @@ public class PuntoYYcomaTests {
         assertEquals(5, trasladosAntiguos[0], "El traslado original con el timestamp más antiguo debería ser el primero");
         assertEquals(4, trasladosAntiguos[1], "El segundo traslado más antiguo debería ser el siguiente en orden");
     }
+
 }

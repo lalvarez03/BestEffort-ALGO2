@@ -26,12 +26,11 @@ public class BestEffort {
         for(int i = 0; i < cantCiudades; i++){
             Ciudad ciudadAux = new Ciudad(i);
             ciudades[i]=ciudadAux;
-            ciudadesSuperavit.apilar(ciudadAux);
         }
-        for(int i = 0; i < traslados.length; i++){
-            trasladosOrdenadosXGanancias.apilar(traslados[i]);
-            trasladosOrdenadosXTimestamp.apilar(traslados[i]);
-        }
+        ciudadesSuperavit.heapificarYAgregar(ciudades);
+        trasladosOrdenadosXGanancias.heapificarYAgregar(traslados);
+        trasladosOrdenadosXTimestamp.heapificarYAgregar(traslados);
+
     }
 
     public void registrarTraslados(Traslado[] traslados){
