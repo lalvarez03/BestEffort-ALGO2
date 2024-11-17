@@ -125,8 +125,8 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
     protected void heapificarYAgregar(T[] array){       // heapifico el array O(n)
         heapificarArray(array);                         
         for (int i = 0; i < array.length; i++){
-            this.lista.add(array[i]);
-            this.guardarIndice(array[i], i);
+            this.lista.add(array[i]);   //O(1)
+            this.guardarIndice(array[i], i); //O(1)
         }
 
     }
@@ -134,7 +134,7 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
     private void heapificarArray(T[] array){
         int n = array.length;
         for (int i = (n/2) -1; i >= 0; i--){
-            heapify(array, n, i);
+            heapify(array, n, i); //algoritmo de Floyd
         }
     }
 

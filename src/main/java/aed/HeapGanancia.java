@@ -11,8 +11,8 @@ public class HeapGanancia extends Heap<Traslado> {
     @Override
     protected void heapify(Traslado[] array, int n, int i) {
         int largo = i; // Inicializar el nodo raíz como el mayor
-        int izq = 2 * i + 1; // Hijo izquierdo
-        int der = 2 * i + 2; // Hijo derecho
+        int izq = (2*i) +1; // Hijo izquierdo
+        int der = (2*i) +2; // Hijo derecho
 
         // Si el hijo izquierdo es mayor que la raíz
         if (izq < n && esMayor(array[izq], array[largo])) {

@@ -74,7 +74,7 @@ public class BestEffort {
         return res;
     }
 
-    private void actualizarCiudades(int origen, int destino, Traslado t){               // al ser todo operaciones elementales queda O(1)
+    private void actualizarCiudades(int origen, int destino, Traslado t){               // al ser en su totalidad operaciones elementales queda O(1)
         if(this.mayoresGanancias.isEmpty()||this.mayoresGanancias.contains(origen)){
             this.mayoresGanancias.clear();
             this.mayoresGanancias.add(origen);

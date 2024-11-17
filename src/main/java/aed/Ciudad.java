@@ -38,7 +38,7 @@ public class Ciudad implements Comparable<Ciudad> {
         this.indiceHeap = i;
     }
 
-    public void agregarGanancia(int ganancia){
+    public void agregarGanancia(int ganancia){ //O(1)
         this.gananciaTotal += ganancia;
         if(gananciaTotal-perdidaTotal>0){
             this.superavit = gananciaTotal-perdidaTotal;
@@ -48,7 +48,7 @@ public class Ciudad implements Comparable<Ciudad> {
         }
     }
 
-    public void agregarPerdida(int perdida){
+    public void agregarPerdida(int perdida){ //O(1)
         this.perdidaTotal += perdida;
         if(gananciaTotal-perdidaTotal>0){
             this.superavit = gananciaTotal-perdidaTotal;
