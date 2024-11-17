@@ -23,58 +23,58 @@ public class BestEffort {
         mayoresPerdidas = new ArrayList<>();
         gananciasTotales = 0;
         cantidadDespachos = 0;
-        for(int i = 0; i < cantCiudades; i++){
+        for(int i = 0; i < cantCiudades; i++){                          // realizo C veces
             Ciudad ciudadAux = new Ciudad(i);
-            ciudades[i]=ciudadAux;
+            ciudades[i]=ciudadAux;                                      // O(1)
         }
-        ciudadesSuperavit.heapificarYAgregar(ciudades);
-        trasladosOrdenadosXGanancias.heapificarYAgregar(traslados);
-        trasladosOrdenadosXTimestamp.heapificarYAgregar(traslados);
+        ciudadesSuperavit.heapificarYAgregar(ciudades);                 // agrego las ciudades a la cola de prioridad O(C) y hago Sift down desde el ultimo elemento hasta el primero (heapify) O(C)
+        trasladosOrdenadosXGanancias.heapificarYAgregar(traslados);     // agrego los traslados a las colas de prioridad O(T) y hago Sift down desde el ultimo elemento hasta el primero (heapify) O(T)
+        trasladosOrdenadosXTimestamp.heapificarYAgregar(traslados);     // agrego los traslados a las colas de prioridad O(T) y hago Sift down desde el ultimo elemento hasta el primero (heapify) O(T)
 
-    }
+    }                                                                   // entonces queda O(T + C)
 
     public void registrarTraslados(Traslado[] traslados){
-        for(int i = 0; i < traslados.length; i++){
-            trasladosOrdenadosXGanancias.apilar(traslados[i]);
-            trasladosOrdenadosXTimestamp.apilar(traslados[i]);
-        }
+        for(int i = 0; i < traslados.length; i++){                  // realiza |traslado| veces
+            trasladosOrdenadosXGanancias.apilar(traslados[i]);      // O(log(T))
+            trasladosOrdenadosXTimestamp.apilar(traslados[i]);      // O(log(T))
+        }                                                           // entonces queda O(|traslado|log(T))
     }
 
     public int[] despacharMasRedituables(int n){
         int[] res = new int[n];
-        for(int i=0;i<n;i++){
-            Traslado t = this.trasladosOrdenadosXGanancias.desapilar(0);
+        for(int i=0;i<n;i++){                                                           // realiza n veces
+            Traslado t = this.trasladosOrdenadosXGanancias.desapilar(0);              // desapilo el primer traslado en la cola de prioridad de Ganancias O(log(T))
             int origen = t.origen;
             int destino = t.destino;
-            ciudades[origen].agregarGanancia(t.gananciaNeta);
-            this.ciudadesSuperavit.ordenarGananciaN(ciudades[origen].getIndiceHeap());
-            ciudades[destino].agregarPerdida(t.gananciaNeta);
-            this.ciudadesSuperavit.ordenarPerdidaN(ciudades[destino].getIndiceHeap());
+            ciudades[origen].agregarGanancia(t.gananciaNeta);                           // O(1)
+            this.ciudadesSuperavit.ordenarGananciaN(ciudades[origen].getIndiceHeap());  // reordeno la cola de prioridad de superavit haciendo Sift up en origen O(log(C))
+            ciudades[destino].agregarPerdida(t.gananciaNeta);                           // O(1)
+            this.ciudadesSuperavit.ordenarPerdidaN(ciudades[destino].getIndiceHeap());  // reordeno la cola de prioridad de superavit haciendo Sift down en destino O(log(C))
             res[i]=t.id;
-            this.trasladosOrdenadosXGanancias.eliminarN(t);
-            this.actualizarCiudades(origen, destino, t);
-        }
+            this.trasladosOrdenadosXGanancias.eliminarN(t);                             // sabiendo el indice puedo desapilar el traslado de la cola de prioridad de Timestamp O(log(T))
+            this.actualizarCiudades(origen, destino, t);                                // O(1)
+        }                                                                               // entonces queda O(n(log(T) + log(C)))
         return res;
     }
 
     public int[] despacharMasAntiguos(int n){
         int[] res = new int[n];
-        for(int i=0;i<n;i++){
-            Traslado t = this.trasladosOrdenadosXTimestamp.desapilar(0);
+        for(int i=0;i<n;i++){                                                           // realiza n veces
+            Traslado t = this.trasladosOrdenadosXTimestamp.desapilar(0);              // desapilo el primer traslado en la cola de prioridad de Timestamp O(log(T))
             int origen = t.origen;
             int destino = t.destino;
-            this.ciudades[origen].agregarGanancia(t.gananciaNeta);
-            this.ciudadesSuperavit.ordenarGananciaN(ciudades[origen].getIndiceHeap());
-            this.ciudades[destino].agregarPerdida(t.gananciaNeta);
-            this.ciudadesSuperavit.ordenarPerdidaN(ciudades[destino].getIndiceHeap());
+            this.ciudades[origen].agregarGanancia(t.gananciaNeta);                      // O(1)
+            this.ciudadesSuperavit.ordenarGananciaN(ciudades[origen].getIndiceHeap());  // reordeno la cola de prioridad de superavit haciendo Sift up en origen O(log(C))
+            this.ciudades[destino].agregarPerdida(t.gananciaNeta);                      // O(1)
+            this.ciudadesSuperavit.ordenarPerdidaN(ciudades[destino].getIndiceHeap());  // reordeno la cola de prioridad de superavit haciendo Sift down en destino O(log(C))
             res[i]=t.id;
-            this.trasladosOrdenadosXTimestamp.eliminarN(t);
-            this.actualizarCiudades(origen, destino, t);
-        }
+            this.trasladosOrdenadosXTimestamp.eliminarN(t);                             // sabiendo el indice puedo desapilar el traslado de la cola de prioridad de Ganancia O(log(t))
+            this.actualizarCiudades(origen, destino, t);                                // O(1)
+        }                                                                               // entonces queda O(n(log(T) + log(C)))
         return res;
     }
 
-    private void actualizarCiudades(int origen, int destino, Traslado t){
+    private void actualizarCiudades(int origen, int destino, Traslado t){               // al ser todo operaciones elementales queda O(1)
         if(this.mayoresGanancias.isEmpty()||this.mayoresGanancias.contains(origen)){
             this.mayoresGanancias.clear();
             this.mayoresGanancias.add(origen);
@@ -107,21 +107,21 @@ public class BestEffort {
         this.cantidadDespachos+=1;
     }
 
-    public int ciudadConMayorSuperavit(){
+    public int ciudadConMayorSuperavit(){                               // O(1)
         Ciudad c = this.ciudadesSuperavit.getMax();
         int res = this.ciudadesSuperavit.getIdCiudadMayorSuperavit(c);
         return res;
     }
 
-    public ArrayList<Integer> ciudadesConMayorGanancia(){
+    public ArrayList<Integer> ciudadesConMayorGanancia(){               // O(1)
         return this.mayoresGanancias;
     }
 
-    public ArrayList<Integer> ciudadesConMayorPerdida(){
+    public ArrayList<Integer> ciudadesConMayorPerdida(){                // O(1)
         return this.mayoresPerdidas;
     }
 
-    public int gananciaPromedioPorTraslado(){
+    public int gananciaPromedioPorTraslado(){                           // O(1)
         return this.gananciasTotales/this.cantidadDespachos;
     }
     

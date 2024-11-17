@@ -18,14 +18,14 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         if (!lista.isEmpty()) {
             indiceActual = this.lista.size();
         }
-        this.lista.add(e);
+        this.lista.add(e);                                          // ubico el elemento al final del heap
         this.guardarIndice(e, indiceActual);
         if (!this.vacia()) {
             while (indiceActual > 0) {
-                indiceActual = this.ordenarDeAbajo(indiceActual);
+                indiceActual = this.ordenarDeAbajo(indiceActual);   // hago Sift up (ordenarDeAbajo) para reordenar el heap
             }
         }
-    }
+    }                                                               // O(log(n))
 
     public int getTamañoLista(){
         return this.lista.size();
@@ -64,12 +64,12 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
             raiz = this.lista.get(indice);
             this.guardarIndice(raiz, -1);
             ultimo = this.lista.get(lista.size() - 1);
-            this.lista.set(indice, ultimo);
+            this.lista.set(indice, ultimo);                 // reemplazo el elemento que busco eliminar por el ultimo
             this.guardarIndice(ultimo, indice);
-            this.lista.remove(lista.size() - 1);
+            this.lista.remove(lista.size() - 1);            // elimino el ultimo
             while (true) {
                 if (this.lista.size() > indice * 2 + 1) {
-                    indice = ordenarDeArriba(indice);
+                    indice = ordenarDeArriba(indice);       // hago Sift down (ordenarDeArriba) para reordenar el heap
                 }
                 if (indice * 2 + 1 >= this.lista.size() && indice * 2 + 2 >= this.lista.size()) {
                     break;
@@ -78,7 +78,7 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         }
         this.eliminarN(raiz);
         return raiz;
-    }
+    }                                                       // O(log(n))
 
     ;
 
@@ -122,8 +122,8 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
 
     ;
 
-    protected void heapificarYAgregar(T[] array){
-        heapificarArray(array);
+    protected void heapificarYAgregar(T[] array){       // heapifico el array O(n)
+        heapificarArray(array);                         
         for (int i = 0; i < array.length; i++){
             this.lista.add(array[i]);
             this.guardarIndice(array[i], i);
