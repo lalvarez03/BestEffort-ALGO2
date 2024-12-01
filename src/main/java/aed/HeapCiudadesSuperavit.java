@@ -10,30 +10,7 @@ public class HeapCiudadesSuperavit extends Heap<Ciudad>{
         return a.getId() < b.getId();
     }
 
-    @Override
-    protected void heapify(Ciudad[] array, int n, int i) {
-            int largo = i; // Inicializar el nodo raíz como el mayor
-            int izq = (2*i) +1; // Hijo izquierdo
-            int der = (2*i) +2; // Hijo derecho
-
-            // Si el hijo izquierdo es mayor que la raíz
-            if (izq < n && esMayor(array[izq], array[largo])) {
-                largo = izq;
-            }
-
-            // Si el hijo derecho es mayor que el más grande actual
-            if (der < n && esMayor(array[der], array[largo])) {
-                largo = der;
-            }
-
-            // Si el más grande no es la raíz
-            if (largo != i) {
-                Ciudad temp = array[i];
-                array[i] = array[largo];
-                array[largo] = temp;
-                heapify(array, n, largo);
-            }
-        }
+    
 
 
 

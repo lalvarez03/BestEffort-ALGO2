@@ -6,7 +6,7 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
     private ArrayList<T> lista;
 
     public Heap(){
-        this.lista = new ArrayList();
+        this.lista = new ArrayList<T>();
     }
 
     public boolean vacia(){
@@ -55,7 +55,13 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
     public T desapilar(int i){
         T raiz = null;
         T ultimo = null;
-        int indice = i;
+        int indice;
+        if(i>this.lista.size()){
+            indice = this.lista.size();
+        }
+        else{
+            indice=i;
+        }
         if (this.lista.size() == 1) {
             raiz = this.lista.get(0);
             this.lista.remove(0);
@@ -67,12 +73,9 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
             this.lista.set(indice, ultimo);                 // reemplazo el elemento que busco eliminar por el ultimo
             this.guardarIndice(ultimo, indice);
             this.lista.remove(lista.size() - 1);            // elimino el ultimo
-            while (true) {
+            while (!(indice * 2 + 1 >= this.lista.size() && indice * 2 + 2 >= this.lista.size())) {
                 if (this.lista.size() > indice * 2 + 1) {
                     indice = ordenarDeArriba(indice);       // hago Sift down (ordenarDeArriba) para reordenar el heap
-                }
-                if (indice * 2 + 1 >= this.lista.size() && indice * 2 + 2 >= this.lista.size()) {
-                    break;
                 }
             }
         }
@@ -138,9 +141,31 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         }
     }
 
+    private void heapify(T[] array, int n, int i) {
+        int largo = i; // Inicializar el nodo raíz como el mayor
+        int izq = (2*i) +1; // Hijo izquierdo
+        int der = (2*i) +2; // Hijo derecho
 
+        // Si el hijo izquierdo es mayor que la raíz
+        if (izq < n && esMayor(array[izq], array[largo])) {
+            largo = izq;
+        }
+
+        // Si el hijo derecho es mayor que el más grande actual
+        if (der < n && esMayor(array[der], array[largo])) {
+            largo = der;
+        }
+
+        // Si el más grande no es la raíz
+        if (largo != i) {
+            T temp = array[i];
+            array[i] = array[largo];
+            array[largo] = temp;
+            heapify(array, n, largo);
+        }
+    }
+    
     protected abstract boolean esMayor(T a, T b);
-    protected abstract void heapify(T[] array, int n, int i);
     protected abstract void guardarIndice(T a, int indice);
     protected abstract void eliminarN(T a);
 

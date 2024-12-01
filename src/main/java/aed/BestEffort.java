@@ -26,6 +26,8 @@ public class BestEffort {
         for(int i = 0; i < cantCiudades; i++){                          // realizo C veces
             Ciudad ciudadAux = new Ciudad(i);
             ciudades[i]=ciudadAux;                                      // O(1)
+            mayoresGanancias.add(ciudadAux.getId());
+            mayoresPerdidas.add(ciudadAux.getId());
         }
         ciudadesSuperavit.heapificarYAgregar(ciudades);                 // agrego las ciudades a la cola de prioridad O(C) y hago Sift down desde el ultimo elemento hasta el primero (heapify) O(C)
         trasladosOrdenadosXGanancias.heapificarYAgregar(traslados);     // agrego los traslados a las colas de prioridad O(T) y hago Sift down desde el ultimo elemento hasta el primero (heapify) O(T)
