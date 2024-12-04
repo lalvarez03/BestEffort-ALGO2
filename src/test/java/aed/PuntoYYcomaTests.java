@@ -45,7 +45,7 @@ public class PuntoYYcomaTests {
     @Test
     void testCiudadConMayorSuperavitInicial() {
         int ciudadSuperavit = bestEffort.ciudadConMayorSuperavit();
-        assertTrue(ciudadSuperavit >= 0);
+        assertTrue(ciudadSuperavit == 0);
     }
 
     @Test

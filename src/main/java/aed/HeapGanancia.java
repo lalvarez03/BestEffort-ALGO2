@@ -17,7 +17,7 @@ public class HeapGanancia extends Heap<Traslado> {
     }
 
     @Override
-    protected void eliminarN(Traslado a){
+    protected void eliminarEnOtroHeap(Traslado a){
         if(a.indiceAntiguo!=-1){
             this.otroHeap.desapilar(a.indiceAntiguo);
             a.setIndiceAntiguo(-1);

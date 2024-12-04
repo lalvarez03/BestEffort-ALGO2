@@ -6,7 +6,7 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
     private ArrayList<T> lista;
 
     public Heap(){
-        this.lista = new ArrayList<T>();
+        lista = new ArrayList<T>();
     }
 
     public boolean vacia(){
@@ -14,17 +14,14 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
     }
 
     public void apilar(T e){
-        int indiceActual = 0;
-        if (!lista.isEmpty()) {
-            indiceActual = this.lista.size();
-        }
+        int indiceActual = this.lista.size();
         this.lista.add(e);                                          // ubico el elemento al final del heap
         this.guardarIndice(e, indiceActual);
-        if (!this.vacia()) {
-            while (indiceActual > 0) {
-                indiceActual = this.ordenarDeAbajo(indiceActual);   // hago Sift up (ordenarDeAbajo) para reordenar el heap
-            }
+
+        while (indiceActual > 0) {
+            indiceActual = this.ordenarDeAbajo(indiceActual);   // hago Sift up (ordenarDeAbajo) para reordenar el heap
         }
+
     }                                                               // O(log(n))
 
     public int getTamañoLista(){
@@ -36,11 +33,8 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         int indicePadre;
         T actual = this.lista.get(indiceActual);
         T padre = this.lista.get((indiceActual - 1) / 2);
-        if (indiceActual % 2 != 0) {
-            indicePadre = (indiceActual - 1) / 2;
-        } else {
-            indicePadre = (indiceActual - 2) / 2;
-        }
+        indicePadre = (indiceActual - 1) / 2;
+
         if (this.esMayor(actual, padre)) {
             this.lista.set(indicePadre, actual);
             this.lista.set(indiceActual, padre);
@@ -52,16 +46,9 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         return indicePadre;
     }
 
-    public T desapilar(int i){
+    public T desapilar(int indice){
         T raiz = null;
         T ultimo = null;
-        int indice;
-        if(i>this.lista.size()){
-            indice = this.lista.size();
-        }
-        else{
-            indice=i;
-        }
         if (this.lista.size() == 1) {
             raiz = this.lista.get(0);
             this.lista.remove(0);
@@ -79,32 +66,34 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
                 }
             }
         }
-        this.eliminarN(raiz);
+        this.eliminarEnOtroHeap(raiz);
         return raiz;
     }                                                       // O(log(n))
 
     ;
 
-    protected int ordenarDeArriba(int i){
-        int indicePadre = i;
+    protected int ordenarDeArriba(int indicePadre){
         T hijoIzq;
         T hijoDer;
         T padre = this.lista.get(indicePadre);
         T hijo = null;
         int indiceHijoMaximo = this.lista.size();
-        if (this.lista.size() - 1 >= indicePadre * 2 + 2) {
-            hijoDer = this.lista.get(indicePadre * 2 + 2);
-            hijoIzq = this.lista.get(indicePadre * 2 + 1);
+        int indiceHijoDerecho = indicePadre * 2 + 2;
+        int indiceHijoIzquierdo =indicePadre * 2 + 1;
+
+        if (this.lista.size() - 1 >= indiceHijoDerecho) {
+            hijoDer = this.lista.get(indiceHijoDerecho);
+            hijoIzq = this.lista.get(indiceHijoIzquierdo);
             if (this.esMayor(hijoDer, hijoIzq)) {
-                hijo = this.lista.get(indicePadre * 2 + 2);
-                indiceHijoMaximo = indicePadre * 2 + 2;
+                hijo = this.lista.get(indiceHijoDerecho);
+                indiceHijoMaximo = indiceHijoDerecho;
             } else {
-                hijo = this.lista.get(indicePadre * 2 + 1);
-                indiceHijoMaximo = indicePadre * 2 + 1;
+                hijo = this.lista.get(indiceHijoIzquierdo);
+                indiceHijoMaximo = indiceHijoIzquierdo;
             }
-        } else if (this.lista.size() - 1 == indicePadre * 2 + 1) {
-            hijo = this.lista.get(indicePadre * 2 + 1);
-            indiceHijoMaximo = indicePadre * 2 + 1;
+        } else if (this.lista.size() - 1 == indiceHijoIzquierdo) {
+            hijo = this.lista.get(indiceHijoIzquierdo);
+            indiceHijoMaximo = indiceHijoIzquierdo;
         }
         if (hijo != null && indiceHijoMaximo < this.lista.size() && this.esMayor(hijo, padre)) {
             this.lista.set(indicePadre, hijo);
@@ -167,7 +156,7 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
     
     protected abstract boolean esMayor(T a, T b);
     protected abstract void guardarIndice(T a, int indice);
-    protected abstract void eliminarN(T a);
+    protected abstract void eliminarEnOtroHeap(T a);
 
 }
 

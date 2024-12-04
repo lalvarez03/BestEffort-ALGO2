@@ -17,7 +17,7 @@ public class HeapTimestamp extends Heap<Traslado>{
     }
 
     @Override
-    protected void eliminarN(Traslado a){
+    protected void eliminarEnOtroHeap(Traslado a){
         if(a.indiceGanancia!=-1){
             this.otroHeap.desapilar(a.indiceGanancia);
             a.setIndiceGanancia(-1);

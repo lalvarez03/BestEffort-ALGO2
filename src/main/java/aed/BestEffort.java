@@ -37,15 +37,15 @@ public class BestEffort {
 
     public void registrarTraslados(Traslado[] traslados){
         for(int i = 0; i < traslados.length; i++){                  // realiza |traslado| veces
-            trasladosOrdenadosXGanancias.apilar(traslados[i]);      // O(log(T))
-            trasladosOrdenadosXTimestamp.apilar(traslados[i]);      // O(log(T))
+            trasladosOrdenadosXGanancias.apilar(traslados[i]);      // O(log(T)), El arbol está balanceado y se hace una operacion x nivel
+            trasladosOrdenadosXTimestamp.apilar(traslados[i]);      // O(log(T)), El arbol está balanceado y se hace una operacion x nivel
         }                                                           // entonces queda O(|traslado|log(T))
     }
 
     public int[] despacharMasRedituables(int n){
         int[] res = new int[n];
         for(int i=0;i<n;i++){                                                           // realiza n veces
-            Traslado t = this.trasladosOrdenadosXGanancias.desapilar(0);              // desapilo el primer traslado en la cola de prioridad de Ganancias O(log(T))
+            Traslado t = this.trasladosOrdenadosXGanancias.desapilar(0);              // desapilo el primer traslado en la cola de prioridad de Ganancias, y como el arbol está balanceado: O(log(T))
             int origen = t.origen;
             int destino = t.destino;
             ciudades[origen].agregarGanancia(t.gananciaNeta);                           // O(1)
@@ -53,7 +53,7 @@ public class BestEffort {
             ciudades[destino].agregarPerdida(t.gananciaNeta);                           // O(1)
             this.ciudadesSuperavit.ordenarPerdidaN(ciudades[destino].getIndiceHeap());  // reordeno la cola de prioridad de superavit haciendo Sift down en destino O(log(C))
             res[i]=t.id;
-            this.trasladosOrdenadosXGanancias.eliminarN(t);                             // sabiendo el indice puedo desapilar el traslado de la cola de prioridad de Timestamp O(log(T))
+            this.trasladosOrdenadosXGanancias.eliminarEnOtroHeap(t);                             // sabiendo el indice puedo desapilar el traslado de la cola de prioridad de Timestamp O(log(T))
             this.actualizarCiudades(origen, destino, t);                                // O(1)
         }                                                                               // entonces queda O(n(log(T) + log(C)))
         return res;
@@ -62,7 +62,7 @@ public class BestEffort {
     public int[] despacharMasAntiguos(int n){
         int[] res = new int[n];
         for(int i=0;i<n;i++){                                                           // realiza n veces
-            Traslado t = this.trasladosOrdenadosXTimestamp.desapilar(0);              // desapilo el primer traslado en la cola de prioridad de Timestamp O(log(T))
+            Traslado t = this.trasladosOrdenadosXTimestamp.desapilar(0);              // desapilo el primer traslado en la cola de prioridad de Timestamp O(log(T)) puesto a que el arbol está balanceado
             int origen = t.origen;
             int destino = t.destino;
             this.ciudades[origen].agregarGanancia(t.gananciaNeta);                      // O(1)
@@ -70,7 +70,7 @@ public class BestEffort {
             this.ciudades[destino].agregarPerdida(t.gananciaNeta);                      // O(1)
             this.ciudadesSuperavit.ordenarPerdidaN(ciudades[destino].getIndiceHeap());  // reordeno la cola de prioridad de superavit haciendo Sift down en destino O(log(C))
             res[i]=t.id;
-            this.trasladosOrdenadosXTimestamp.eliminarN(t);                             // sabiendo el indice puedo desapilar el traslado de la cola de prioridad de Ganancia O(log(t))
+            this.trasladosOrdenadosXTimestamp.eliminarEnOtroHeap(t);                             // sabiendo el indice puedo desapilar el traslado de la cola de prioridad de Ganancia, y como el arbol está balanceado: O(log(t))
             this.actualizarCiudades(origen, destino, t);                                // O(1)
         }                                                                               // entonces queda O(n(log(T) + log(C)))
         return res;

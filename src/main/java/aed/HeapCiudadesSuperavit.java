@@ -21,7 +21,7 @@ public class HeapCiudadesSuperavit extends Heap<Ciudad>{
     }
     
     @Override
-    protected void eliminarN(Ciudad a){
+    protected void eliminarEnOtroHeap(Ciudad a){
     }
 
     public void ordenarGananciaN(int i){
