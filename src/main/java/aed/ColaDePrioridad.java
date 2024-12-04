@@ -5,7 +5,7 @@ public interface ColaDePrioridad<T> {
 
     public void apilar(T e);
 
-    public T desapilar(int i);
+    public T desapilar();
 
     public T getMax();
 

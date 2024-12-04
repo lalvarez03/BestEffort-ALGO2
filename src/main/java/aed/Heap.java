@@ -28,6 +28,10 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         return this.lista.size();
     }
 
+    public T desapilar(){
+        return desencolar(0);
+    }
+
     protected int ordenarDeAbajo(int i){
         int indiceActual = i;
         int indicePadre;
@@ -46,7 +50,7 @@ public abstract class Heap<T extends Comparable<T>> implements ColaDePrioridad<T
         return indicePadre;
     }
 
-    public T desapilar(int indice){
+    public T desencolar(int indice){
         T raiz = null;
         T ultimo = null;
         if (this.lista.size() == 1) {

@@ -45,7 +45,7 @@ public class BestEffort {
     public int[] despacharMasRedituables(int n){
         int[] res = new int[n];
         for(int i=0;i<n;i++){                                                           // realiza n veces
-            Traslado t = this.trasladosOrdenadosXGanancias.desapilar(0);              // desapilo el primer traslado en la cola de prioridad de Ganancias, y como el arbol está balanceado: O(log(T))
+            Traslado t = this.trasladosOrdenadosXGanancias.desencolar(0);              // desapilo el primer traslado en la cola de prioridad de Ganancias, y como el arbol está balanceado: O(log(T))
             int origen = t.origen;
             int destino = t.destino;
             ciudades[origen].agregarGanancia(t.gananciaNeta);                           // O(1)
@@ -62,7 +62,7 @@ public class BestEffort {
     public int[] despacharMasAntiguos(int n){
         int[] res = new int[n];
         for(int i=0;i<n;i++){                                                           // realiza n veces
-            Traslado t = this.trasladosOrdenadosXTimestamp.desapilar(0);              // desapilo el primer traslado en la cola de prioridad de Timestamp O(log(T)) puesto a que el arbol está balanceado
+            Traslado t = this.trasladosOrdenadosXTimestamp.desencolar(0);              // desapilo el primer traslado en la cola de prioridad de Timestamp O(log(T)) puesto a que el arbol está balanceado
             int origen = t.origen;
             int destino = t.destino;
             this.ciudades[origen].agregarGanancia(t.gananciaNeta);                      // O(1)
