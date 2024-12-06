@@ -81,6 +81,7 @@ public class PuntoYYcomaTests {
         assertEquals(5, trasladosAntiguos[0]);
         assertEquals(4, trasladosAntiguos[1]);
     }
+
     @Test
     void pruebaModificacionCiudadesSuperavit() {
         Traslado[] nuevosTraslados = {
@@ -108,6 +109,7 @@ public class PuntoYYcomaTests {
 
 
     }
+
     @Test
     void pruebaModificacionCiudadesGananciayPerdida() {
         Traslado[] nuevosTraslados = {
@@ -147,4 +149,45 @@ public class PuntoYYcomaTests {
 
     }
 
+    @Test
+    void despacharMasRedituablesDeLoQueTengo(){
+        Traslado[] nuevosTraslados = {
+                new Traslado(7, 1, 2, 25000, 70),
+                new Traslado(8, 3, 5, 35000, 80)
+        };
+        bestEffort.registrarTraslados(nuevosTraslados);
+        int[] despachos = bestEffort.despacharMasRedituables(56); //Despacho 56 traslados solo teniendo 2 registrados
+        assertEquals(8, despachos.length); //Verifico haber despachado solo lo que tengo
+        assertEquals(despachos[0], 8 );
+        assertEquals(despachos[1], 7 );
+    }
+
+    @Test
+    void despacharMasAntiguosDeLoQueTengo(){
+        Traslado[] nuevosTraslados = {
+                new Traslado(7, 1, 2, 25000, 1),
+                new Traslado(8, 3, 5, 35000, 2)
+        };
+        bestEffort.registrarTraslados(nuevosTraslados);
+        int[] despachos = bestEffort.despacharMasAntiguos(56); //Despacho 56 traslados solo teniendo 2 registrados
+        assertEquals(8, despachos.length); //Verifico haber despachado solo lo que tengo
+        assertEquals(despachos[0], 7 );
+        assertEquals(despachos[1], 8 );
+    }
+
+    @Test
+    void ciudadesMayorPerdidaOGananciaSinDespachar(){
+        Traslado[] nuevosTraslados = {
+                new Traslado(7, 1, 2, 250, 70),
+                new Traslado(8, 3, 4, 350, 80)
+        };
+        bestEffort.registrarTraslados(nuevosTraslados);
+        ArrayList<Integer> ciudades = new ArrayList<Integer>();
+        for(int i = 0; i < 7; i++){ //cantidad de ciudades inicializadas en init()
+            ciudades.add(i); //agrego todas las cidudades
+        }
+
+        assertEquals(ciudades, bestEffort.ciudadesConMayorGanancia());
+        assertEquals(ciudades, bestEffort.ciudadesConMayorPerdida());
+    }
 }

@@ -11,6 +11,7 @@ public class BestEffort {
     private HeapGanancia trasladosOrdenadosXGanancias;
     private HeapTimestamp trasladosOrdenadosXTimestamp;
     private HeapCiudadesSuperavit ciudadesSuperavit;
+    private int cantidadEncolados;
 
     public BestEffort(int cantCiudades, Traslado[] traslados){
         ciudades = new Ciudad[cantCiudades];
@@ -23,6 +24,7 @@ public class BestEffort {
         mayoresPerdidas = new ArrayList<>();
         gananciasTotales = 0;
         cantidadDespachos = 0;
+        cantidadEncolados=traslados.length;                             //O(1)
         for(int i = 0; i < cantCiudades; i++){                          // realizo C veces
             Ciudad ciudadAux = new Ciudad(i);
             ciudades[i]=ciudadAux;                                      // O(1)
@@ -39,10 +41,14 @@ public class BestEffort {
         for(int i = 0; i < traslados.length; i++){                  // realiza |traslado| veces
             trasladosOrdenadosXGanancias.apilar(traslados[i]);      // O(log(T)), El arbol está balanceado y se hace una operacion x nivel
             trasladosOrdenadosXTimestamp.apilar(traslados[i]);      // O(log(T)), El arbol está balanceado y se hace una operacion x nivel
+            cantidadEncolados++;                                    //O(1)
         }                                                           // entonces queda O(|traslado|log(T))
     }
 
     public int[] despacharMasRedituables(int n){
+        if(n>cantidadEncolados){                                                     //O(1)
+            n=cantidadEncolados;                                                     //O(1)
+        }
         int[] res = new int[n];
         for(int i=0;i<n;i++){                                                           // realiza n veces
             Traslado t = this.trasladosOrdenadosXGanancias.desapilar();              // desapilo el primer traslado en la cola de prioridad de Ganancias, y como el arbol está balanceado: O(log(T))
@@ -55,11 +61,15 @@ public class BestEffort {
             res[i]=t.id;
             this.trasladosOrdenadosXGanancias.eliminarEnOtroHeap(t);                             // sabiendo el indice puedo desapilar el traslado de la cola de prioridad de Timestamp O(log(T))
             this.actualizarCiudades(origen, destino, t);                                // O(1)
+            cantidadEncolados--;                                                        //O(1)
         }                                                                               // entonces queda O(n(log(T) + log(C)))
         return res;
     }
 
     public int[] despacharMasAntiguos(int n){
+        if(n>cantidadEncolados){                                                     //O(1)
+            n=cantidadEncolados;                                                     //O(1)
+        }
         int[] res = new int[n];
         for(int i=0;i<n;i++){                                                           // realiza n veces
             Traslado t = this.trasladosOrdenadosXTimestamp.desapilar();              // desapilo el primer traslado en la cola de prioridad de Timestamp O(log(T)) puesto a que el arbol está balanceado
@@ -72,6 +82,7 @@ public class BestEffort {
             res[i]=t.id;
             this.trasladosOrdenadosXTimestamp.eliminarEnOtroHeap(t);                             // sabiendo el indice puedo desapilar el traslado de la cola de prioridad de Ganancia, y como el arbol está balanceado: O(log(t))
             this.actualizarCiudades(origen, destino, t);                                // O(1)
+            cantidadEncolados--;                                                        // O(1)
         }                                                                               // entonces queda O(n(log(T) + log(C)))
         return res;
     }
