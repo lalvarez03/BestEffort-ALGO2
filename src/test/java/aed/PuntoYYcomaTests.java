@@ -190,4 +190,9 @@ public class PuntoYYcomaTests {
         assertEquals(ciudades, bestEffort.ciudadesConMayorGanancia());
         assertEquals(ciudades, bestEffort.ciudadesConMayorPerdida());
     }
+    @Test
+    void promedioConDespachosDeMas(){
+        bestEffort.despacharMasRedituables(40);
+        assertEquals(175, bestEffort.gananciaPromedioPorTraslado());
+    }
 }
